@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Memoria operaciones</title>
+<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.1.custom.min.css" />
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui-1.10.1.custom.min.js"></script>
+<script>
+var numCartas = 10;
+var carta1 = " ";
+var carta2 = " ";
+var score = 0;
+var puntos = 0;
+
+$(document).ready(inicio);
+
+function inicio(){
+	cargaCartas();
+	$(".carta").on("click",voltear);
+	$("#dialogo").dialog({
+		autoOpen: false,
+		show:{effect:"blind", duration:1000},
+		hide:{effect:"explode", duration:1000},
+		modal:true,
+		buttons: {
+				  "Reiniciar": function(){
+				  $(this).dialog("close"),
+				  //recarga la página (el juego)
+				   location.reload()}
+				 },
+		width: "500px"
+	});
+}
+function voltear(){
+	//Despliega numero
+	$(this).children().css("display","block");
+	//Aumentamos el score
+	score++;
+	$("#puntos").html("Score: "+score);
+	//Primera carta
+	if(carta1==" "){
+		carta1 = $(this);
+	} else {
+		carta2 = $(this);
+		$(".carta").off();
+		setTimeout(verificar,1000);
+	}
+}
+function verificar(){
+	if(carta1.attr("data-num")==carta2.attr("data-num")){
+		carta1.removeClass('carta').addClass('desaparece');	
+		carta2.removeClass('carta').addClass("desaparece");
+		puntos++;
+		if(puntos==numCartas){
+			clearInterval(t);
+			$("#mensaje").text("Felicidades, terminaste el juego en: "+$("#tiempo").text()+" de sobra y un Score de: "+score);
+			$("#dialogo").dialog('open');
+		}
+	} else {
+		carta1.children().css("display","none");
+		carta2.children().css("display","none");	
+	}
+	carta1 = " ";
+	$(".carta").on("click",voltear);
+}
+function cargaCartas(){
+	//Generar un arreglo vacio
+	var numeros_array = new Array();
+	var num = 0;
+	//Generar el arreglo
+	numeros_array.push({c:"8+4", r:12}); 
+	numeros_array.push({c:"12", r:12});
+	numeros_array.push({c:"10/2", r:5}); 
+	numeros_array.push({c:"5", r:5}); 
+	numeros_array.push({c:"8-4", r:4});
+	numeros_array.push({c:"4", r:4}); 
+	numeros_array.push({c:"2*3", r:6});
+	numeros_array.push({c:"6", r:6}); 
+	numeros_array.push({c:"5+5", r:10}); 
+	numeros_array.push({c:"10", r:10}); 
+	numeros_array.push({c:"10-9", r:1});
+	numeros_array.push({c:"1", r:1}); 
+	numeros_array.push({c:"1+1", r:2}); 
+	numeros_array.push({c:"2", r:2}); 
+	numeros_array.push({c:"10-7", r:3}); 
+	numeros_array.push({c:"3", r:3}); 
+	numeros_array.push({c:"4+3", r:7}); 
+	numeros_array.push({c:"7", r:7}); 
+	numeros_array.push({c:"16/2", r:8}); 
+	numeros_array.push({c:"8", r:8});
+	//
+	$('.carta').each(function(i){
+		num = numeros_array.length;
+		n = Math.floor(Math.random()*num);
+		$(this).html("<p>"+numeros_array[n].c+"</p>");
+		$(this).attr("data-num",numeros_array[n].r);
+		numeros_array.splice(n,1);
+	});
+	tiempo(3);
+}
+function tiempo(limite){
+	var min = limite - 1;
+	var seg = 59;
+	t = setInterval(function(){
+		$("#tiempo").html("");
+		if(seg<10){
+			$("#tiempo").append("00:0"+min+":0"+seg);
+		} else {
+			$("#tiempo").append("00:0"+min+":"+seg);
+		}
+		seg--;
+		if(seg<0){
+			seg=59;
+			min--;
+		}
+		if(min<0){
+			clearInterval(t);
+			$("#mensaje").text("Lo sentimos, el tiempo se terminó");
+			$("#dialogo").dialog('open');
+		}
+	}, 1000);
+}
+
+</script>
+<style>
+#tablero{
+	width:650px;
+	margin:10px auto;
+}
+.carta{
+	border-radius:1em;
+	border: 3px solid white;
+	background-color:#F93;
+	cursor:pointer;
+	display:inline-block;
+	height:110px;
+	width:110px;
+	margin:.3em;
+	overflow:hidden;
+	vertical-align:top;	
+}
+.desaparece{
+	background-color:white;
+	border: 3px solid white;
+	color: white;
+	display:inline-block;
+	height:110px;
+	width:110px;
+	vertical-align:top;	
+	margin:.3em;
+}
+#tiempo{
+	float:left;
+	font-size:30px;
+}
+#puntos{
+	float:right;
+	font-size:30px;
+}
+#tablero p{
+	color: white;
+	margin-top:1.2em;
+	z-index:1;
+	font-size:30px;
+	text-align:center;	
+	display:none;
+}
+</style>
+</head>
+
+<body>
+<div id="tablero">
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<br>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<br>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<br>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<br>
+<div id="tiempo">00:00:00</div>
+<div id="puntos">Score: 0</div>
+<div id="dialogo">
+	<p id="mensaje"><span class="ui-icon ui-icon-alert" style="float:left; margin-right: 10px"></span>
+	</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Memoria</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+var numCartas = 10;
+var carta1 = " ";
+var carta2 = " ";
+var score = 0;
+var puntos = 0;
+
+$(document).ready(function inicio(){
+	cargaCartas();
+	$(".carta").on("click",voltear);
+});
+function voltear(){
+	//Despliega numero
+	$(this).children().css("display","block");
+	//Aumentamos el score
+	score++;
+	$("#puntos").html("Score: "+score);
+	//Primera carta
+	if(carta1==" "){
+		carta1 = $(this);
+	} else {
+		carta2 = $(this);
+		$(".carta").off();
+		setTimeout(verificar,1000);
+	}
+}
+function verificar(){
+	if(carta1.attr("data-num")==carta2.attr("data-num")){
+		carta1.removeClass('carta').addClass('desaparece');	
+		carta2.removeClass('carta').addClass("desaparece");
+		puntos++;
+		if(puntos==numCartas){
+			alert("Felicidades, terminaste el juego");
+		}
+	} else {
+		carta1.children().css("display","none");
+		carta2.children().css("display","none");	
+	}
+	carta1 = " ";
+	$(".carta").on("click",voltear);
+}
+function cargaCartas(){
+	//Generar un arreglo vacio
+	var paises_array = new Array();
+	var num = 0;
+	//1) Generar el arreglo
+	paises_array.push("Mexico");
+	paises_array.push("Colombia");
+	paises_array.push("Venezuela");
+	paises_array.push("Bolivia");
+	paises_array.push("Guatemala");
+	paises_array.push("Argentina");
+	paises_array.push("Chile");
+	paises_array.push("Uruguay");
+	paises_array.push("Perú");
+	paises_array.push("Ecuador");
+	paises_array.push("Mexico");
+	paises_array.push("Colombia");
+	paises_array.push("Venezuela");
+	paises_array.push("Bolivia");
+	paises_array.push("Guatemala");
+	paises_array.push("Argentina");
+	paises_array.push("Chile");
+	paises_array.push("Uruguay");
+	paises_array.push("Perú");
+	paises_array.push("Ecuador");
+	//
+	$('.carta').each(function(i){
+		//2) Numero de paises
+		num = paises_array.length;
+		//3) Numero aleatrio
+		n = Math.floor(Math.random()*num);
+		//4) Despliega
+		$(this).html("<p>"+paises_array[n]+"</p>");
+		//5) Numero
+		$(this).attr("data-num",paises_array[n]);
+		//6) Borra
+	    paises_array.splice(n,1);
+	});
+	//7)Tiempo
+	tiempo(2);
+}
+function tiempo(limite){
+	var min = limite - 1;
+	var seg = 59;
+	t = setInterval(function(){
+		$("#tiempo").html("");
+		if(seg<10){
+			$("#tiempo").append("00:0"+min+":0"+seg);
+		} else {
+			$("#tiempo").append("00:0"+min+":"+seg);
+		}
+		seg--;
+		if(seg<0){
+			seg=59;
+			min--;
+		}
+		if(min<0){
+			clearInterval(t);
+			alert("Lo sentimos, el tiempo se terminó");
+			$(".carta").off();
+		}
+	}, 1000);
+}
+
+</script>
+<style>
+#tablero{
+	width:650px;
+	margin:10px auto;
+}
+.carta{
+	border-radius:1em;
+	border: 3px solid white;
+	background-color:#F93;
+	cursor:pointer;
+	display:inline-block;
+	height:110px;
+	width:110px;
+	margin:.3em;
+	overflow:hidden;
+	vertical-align:top;	
+}
+.desaparece{
+	background-color:white;
+	border: 3px solid white;
+	color: white;
+	display:inline-block;
+	height:110px;
+	width:110px;
+	vertical-align:top;	
+	margin:.3em;
+}
+#tiempo{
+	float:left;
+	font-size:30px;
+}
+#puntos{
+	float:right;
+	font-size:30px;
+}
+#tablero p{
+	color: white;
+	margin-top:1.2em;
+	z-index:1;
+	font-size:24px;
+	text-align:center;	
+	display:none;
+}
+</style>
+</head>
+
+<body>
+<div id="tablero">
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<br>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<br>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<br>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<div class="carta" data-num=""></div>
+<br>
+<div id="score">
+<div id="tiempo">00:00:00</div>
+<div id="puntos">Score: 0</div>
+</div>
+</div>
+</body>
+</html>

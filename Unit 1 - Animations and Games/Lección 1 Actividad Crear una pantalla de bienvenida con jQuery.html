@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bienvenida</title>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+$(document).ready(inicio);
+function inicio(){
+	//1. Oculta todos los objetos con * y hide()
+	$("div").hide();
+	//2. Muestra la división bienvenidos con un fadeIn de 1 segundo	
+    $("#bienvenido").fadeIn(1000);
+	//3. Muestra "anuestra" con un fadeIn de 1 seg. y un delay de 800 miliseg.
+	$("#anuestra").delay(800).fadeIn(1000);
+	//4. Muestra "pagina" con un fadeIn de 1 seg. y un delay de 1600 miliseg.
+	$("#pagina").delay(1600).fadeIn(1000);
+	//5. Muestra "boton" con un fadeIn de 1 seg. y un delay de 2400 milise.
+	$("#boton").delay(2400).fadeIn(1000);
+	//6. Crea una función click para el botón
+	$("#boton").click(function(){
+		//7. Crea un fadeOut de un segundo para la div. "boton"
+		$("#boton").fadeOut(1000);
+		//8. Crea un fadeOut de un segundo para la div. "pagina" con un delay de 800 milisegundos
+		$("#pagina").delay(800).fadeOut(1000);
+		//9. Crea un fadeOut de un segundo para la div. "anuestra" con un delay de 1600 milisegundos
+		$("#anuestra").delay(1600).fadeOut(1000);
+		//10. Crea un fadeOut de un segundo para la div. "bienvenido" con un delay de 2400 milisegundos
+		$("#bienvenido").delay(2400).fadeOut(1000);
+	});
+}
+</script>
+<style>
+body{
+	margin:0;
+	padding:0;
+}
+div{
+	height:90px;
+	text-align:center;
+	font-size:90px;
+}
+button{
+	text-align:center;
+	height:50px;
+	font-size:35px;
+	border-radius:15px;
+	background-color:purple;
+	color:white;
+}
+</style>
+</head>
+
+<body>
+<div id="bienvenido"><p>Bienvenid@</p></div>
+<div id="anuestra"><p>a nuestra</p></div>
+<div id="pagina"><p>página web</p></div>
+<div id="boton"><button>Entrar</button></div>
+</body>
+</html>

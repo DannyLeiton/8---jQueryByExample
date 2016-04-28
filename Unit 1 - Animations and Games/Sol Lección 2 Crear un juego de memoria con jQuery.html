@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Arrastra palabras</title>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
+<script type="text/javascript" src="js/jquery-ui.js" ></script>
+<script>
+$(document).ready(inicio);
+/********* Variables *****/
+var cuadros_array = new Array();
+var ingles_array = new Array();
+var $item;
+//1) Cuadros
+cuadros_array.push({texto:"Caballo", ingles:"Horse", num:1});
+cuadros_array.push({texto:"Perro", ingles:"Dog", num:2});
+cuadros_array.push({texto:"Gato", ingles:"Cat", num:3});
+cuadros_array.push({texto:"Pájaro", ingles:"Bird", num:4});
+cuadros_array.push({texto:"Gallina", ingles:"Hen", num:5});
+cuadros_array.push({texto:"Vaca", ingles:"Cow", num:6});
+cuadros_array.push({texto:"Auto", ingles:"Car", num:1});
+cuadros_array.push({texto:"Avión", ingles:"Airplain", num:2});
+cuadros_array.push({texto:"Mesa", ingles:"Table", num:3});
+cuadros_array.push({texto:"Silla", ingles:"Chair", num:4});
+cuadros_array.push({texto:"Ventana", ingles:"Window", num:5});
+cuadros_array.push({texto:"Casa", ingles:"Home", num:6});
+cuadros_array.push({texto:"Lapiz", ingles:"Pen", num:1});
+cuadros_array.push({texto:"Pluma", ingles:"Pen", num:2});
+cuadros_array.push({texto:"Libro", ingles:"Book", num:3});
+cuadros_array.push({texto:"Cielo", ingles:"Sky", num:4});
+cuadros_array.push({texto:"Mar", ingles:"Sea", num:5});
+cuadros_array.push({texto:"Estrella", ingles:"Star", num:6});
+//
+function inicio(){
+	//Oculta y muestra botones
+	$("#jugar").hide();
+	$("#verifica").show();
+	$(".foto").draggable({cursor:"move"});
+	//
+	//LLenamos las fotos
+	//
+	$(".foto").each(function(i) {
+		//Determina la longitud del arreglo
+        l = cuadros_array.length;
+		//Selecciona un elemento del arreglo en forma aleatoria
+		r = Math.floor(Math.random()*l);
+		//Despliega la palabra
+		$(this).html("<p>"+cuadros_array[r].texto+"</p>");
+		//Almacena el número
+		$(this).attr("data-num",cuadros_array[r].num);
+		//Almacena la palabra utilizada
+		ingles_array.push(cuadros_array[r]);
+		//Elimina el nodo del arreglo
+		cuadros_array.splice(r,1);
+		//
+    });
+	//
+	//marcos
+	//
+	$(".marco").droppable({
+		hoverClass: "ui-state-active",
+		drop: function(event, ui){
+			$(this).addClass("ui-state-highlight");	
+		}
+	});
+	//
+	$(".marco").each(function(i){
+		//1) Determina el largo del arreglo
+		l = ingles_array.length;
+		//2) Selecciona el numero aleatorio
+		r = Math.floor(Math.random()*l);
+		//3) Despliega la palabra
+		$(this).html("<p>"+ingles_array[r].ingles+"</p>");
+		//4) Almacena el número
+		$(this).attr("data-num",ingles_array[r].num);
+		//5) Elimina el nodo del arreglo
+		ingles_array.splice(r,1);	
+	});
+	//
+	$("#verifica").on("click",onVerifica);
+	$("#jugar").on("click",onJugar);
+	$(".foto").on("mousedown",onMouseDown);
+	$(".foto").on("mouseup",onMouseUp);
+	$(".marco").on("drop",onDrop);
+	
+}
+function onVerifica(){
+	//Oculta y muestra botones
+	$("#jugar").show();
+	$("#verifica").hide();
+	//
+	$(".marco").each(function(i){
+		var r = $(this).attr("data-num");
+		var f = $(this).attr("data-cuadro");
+		if(r==f){
+			$("#res"+i).html("<p class='verde'>Correcto</p>");
+		} else {
+			$("#res"+i).html("<p class='rojo'>Incorrecto</p>");
+		}
+	});
+	
+}
+function onJugar(){
+	location.reload(true);
+}
+function onMouseDown(){
+	$item = $(this);
+	$item.css("z-index","1");
+}
+function onMouseUp(){
+}
+function onDrop(){
+	$(this).attr("data-cuadro", $item.attr("data-num"));
+}
+</script>
+<style>
+#juego{
+	width:800px;
+	margin:0 auto;
+	text-align:center;
+}
+.foto{
+	width:120px;
+	height:120px;
+	float:left;
+	margin:5px;
+	background-color: orange;
+}
+.marco{
+	width:120px;
+	height:105px;
+	background-color: #ccc;
+	float:left;
+	margin:5px;
+	text-align:center;
+	padding-top:15px;
+}
+.res{
+	width:120px;
+	float:left;
+	margin:5px;
+}
+.rojo{
+	color:red;
+}
+.verde{
+	color:green;
+}
+</style>
+</head>
+
+<body>
+<div id="juego">
+<table width="800px">
+	<tr>
+    	<td>
+        	<div class="foto" data-num=""></div>
+            <div class="foto" data-num=""></div>
+            <div class="foto" data-num=""></div>
+            <div class="foto" data-num=""></div>
+            <div class="foto" data-num=""></div>
+            <div class="foto" data-num=""></div>
+        </td>
+    </tr>
+	<tr>
+    <td>
+        <div class="marco" data-num="" data-cuadro=""></div>
+        <div class="marco" data-num="" data-cuadro=""></div>
+        <div class="marco" data-num="" data-cuadro=""></div>
+        <div class="marco" data-num="" data-cuadro=""></div>
+        <div class="marco" data-num="" data-cuadro=""></div>
+        <div class="marco" data-num="" data-cuadro=""></div>
+    </td>
+    </tr>
+	<tr>
+    <td>
+        <div class="res" id="res0"></div>
+        <div class="res" id="res1"></div>
+        <div class="res" id="res2"></div>
+        <div class="res" id="res3"></div>
+        <div class="res" id="res4"></div>
+        <div class="res" id="res5"></div>
+    </td>
+    </tr>
+</table>
+<input value="Verifica" type="button" id="verifica" name="verifica">
+<input value="Volver a jugar" type="button" id="jugar" name="jugar">
+</div>
+</body>
+</html>
