@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+#contenido{
+	position:relative;
+	width:900px;
+	margin:0;
+	background:#fff;
+	margin:30px auto;	
+}
+#contenedorCarrusel{
+	height:600px;
+	margin:0;
+	background:#ccc 0px 0px url(images/mapa.png);
+	border-radius:1em;
+	box-shadow:10px 10px 5px #000;    
+    border:3px solid black;
+}
+#contenedorTexto{
+	margin: 0px 0px 0px 165px;
+	width:500px;
+	padding: 0px 0px 0px 20px;
+}
+#carrusel{
+	margin: 0px auto;
+	height:600px;
+	width:850px;
+}
+#datos{
+	display:none;	
+}
+#descripcion {
+    /*background:#ccc 0px 0px url(images/descBack-ground.jpg);*/
+    height: 300px;
+    width: 500px;
+}
+#descripcion h2{
+	font-family:"Courier New", Helvetica, sans-serif;
+	font-size:24px;
+	margin:20px 0px 5px 0px;
+	color:rgba(30,116,255,15);
+	text-align:center;
+}
+#descripcion p{
+	font-family:"Courier New", Helvetica, sans-serif;
+	font-size:18px;
+	text-align:justify;
+	color:white;
+    mix-blend-mode:exclusion;
+    margin-top:10px;
+}
+img{
+    border:3px solid black;
+    border-radius:10px; 
+    background-color:white;
+}
+</style>
+<script src="js/jquery-1.6.min.js"></script>
+<script src="js/jquery.roundabout.min.js"></script>
+<script>
+$(document).ready(inicio);
+function inicio(){
+	$("#datos .item").each(function(i) {
+        $("#carrusel").append($(this).find(".foto").html());
+    });
+	crearCarrusel();
+	despliegaTexto();
+}
+function crearCarrusel(){
+	$("#carrusel").roundabout({
+		startingChild: window.startingItem,
+		childSelector: "img",
+		tilt: -4.5,
+		minOpacity: 0.75,
+		minScale: 0.75,
+		duration: 1200,
+		clickToFocus:true,
+		clickToFocusCallback: despliegaTexto
+	});
+}
+function despliegaTexto(){
+	var elemento = $("#carrusel").data("roundabout").childInFocus;
+	var texto = $("#datos .item .texto:eq("+elemento+")").html();
+	$("#descripcion").html(texto);
+}
+</script>
+<link rel="icon" href="http://example.com/favicon.png">
+<title>Mario go-round</title>
+</head>
+
+<body>
+<div id="contenido">
+	<div id="contenedorCarrusel">
+    	<div id="carrusel"></div>
+    </div>
+    <div id="contenedorTexto">
+    	<div id="descripcion"></div>
+    </div>
+    <!--Datos -->
+    <div id="datos">
+    	<div class="item">
+        	<div class="foto">
+            	<img src="images/bowser.jpg" alt="Bowser" width="150px" height="100px"/>
+            </div>
+            <div class="texto">
+            	<h2>Bowser</h2>
+                <p>Rival Mario and the main villain of the series. Each Peach's kidnapping attempt fails. It has many castles, and an impressive arsenal of weapons: a submarine, tanks, warships, the cruiser Koopa and his favorite Clown Copter. In his youth, he grew up wizard Kamek. Bowser is the father until o? miora children: Ludwig, Roy, Jr. Morton. , Wendy, Iggy, Lemmiego, Larry and Bowser Jr. . Bowser was several times allied with Mario - Super Mario RPG and Mario & Luigi (though not for long).</p>
+            </div>
+        </div>
+        
+        <div class="item">
+        	<div class="foto">
+            	<img src="images/luigi.png" alt="Luigi" width="150px" height="100px"/>
+            </div>
+            <div class="texto">
+            	<h2>Luigi</h2>
+                <p>Younger, taller and less impulsive than his brother, Luigi for a very long time he remained in the shadows. In Super Mario Bros.. 2 played a more important role, where the very handy ability to jump. While Mario is famous for its big jumps, Luigi is the better of him. The younger of the brothers had to save his brother Mario is Missing, and'' Luigi's Mansion, where Mario has been kidnapped. Last Luigi saving Princess Eclair, which tells in Paper Mario: TTYD, where he also published a book, "Super Luigi." Maybe soon we'll see him again at his own game ... </p>
+            </div>
+        </div>
+        
+        <div class="item">
+        	<div class="foto">
+            	<img src="images/mario.png" alt="Mario" width="150px" height="100px"/>
+            </div>
+            <div class="texto">
+            	<h2>Mario</h2>
+                <p>Mario is the older of the brothers. He was born in Italy, raised in the Mushroom Kingdom. His first adventure took place already during childhood - along with Yoshi tribe who were a baby, he had to save his brother Luigi. Debut took place in gaming slot machines in the game Donkey Kong, where he had to rescue his girlfriend Pauline. Mario, a plumber though, he happened to also play the role of doctor, a judge, a carpenter, golfer, tennis player, driver, and even a wrestler. However, the most common occupation is to rescue Princess Peach from the hands of Bowser. Appeared in countless games - not always in the lead role.</p>
+            </div>
+        </div>
+        
+        <div class="item">
+        	<div class="foto">
+            	<img src="images/toad.jpg" alt="Toad" width="150px" height="100px"/>
+            </div>
+            <div class="texto">
+            	<h2>Toad</h2>
+                <p>Toad is not a single character, but a race living in the Mushroom Kingdom. Peach has always faithfully committed but not always able to ensure its safety. Toady many times helped Mariowi in his adventures, and sometimes you can play them, for example, in Super Mario Bros.. Second Toad in Wario Woods was the main character. He must then save the dark forest before Wari.</p>
+            </div>
+        </div>
+        
+        <div class="item">
+        	<div class="foto">
+            	<img src="images/wario.png" alt="Wario" width="150px" height="100px"/>
+            </div>
+            <div class="texto">
+            	<h2>Wario</h2>
+                <p>Wario is the opposite of Mario - is a greedy, evil and selfish. Is known for its great strength, which Mario can only poma?y?. He wants to have it all to yourself. Marian tried to steal Wario castle, but he failed it. But still got his way - he robbed the pirates and their leader - Captain Syrup (Syrup). For the money built his own castle. His name comes from the word Warui, which simply means bad. His brother is Waluigi, but one knows if they really are related.</p>
+            </div>
+        </div>
+        
+        <div class="item">
+        	<div class="foto">
+            	<img src="images/yoshi.png" alt="Yoshi" width="150px" height="100px"/>
+            </div>
+            <div class="texto">
+            	<h2>Yoshi</h2>
+                <p>Yoshi is a race inhabiting the world of Mario, but sometimes there is a single game Yoshi - in this case, it is one character. Yoshi and Luigi Mariowi helped in the days of their childhood, when the tribe were Yoshich Mario and help him free his kidnapped brother. Yoshi inhabit your island called Yoshi's Island'' (or simply Yoshich Island). They do not speak human language, but Mario and Luigi are able to talk to them since childhood, spent in their company. Yoshi has a lot of ability - can change shapes, devouring the enemy and zaminia? it in eggs and throw them or spit fruit juice.</p>
+            </div>
+        </div>
+        
+        <div class="item">
+        	<div class="foto">
+            	<img src="images/donkie.png" alt="El grifo" width="150px" height="100px"/>
+            </div>
+            <div class="texto">
+            	<h2>Donkie Kong</h2>
+                <p>The first time was in the game Donkey Kong Jr., Which saved his father imprisoned in a cage by Mario. After changing the name of his father no longer needed, Jr. ends. Now he is leading the way among Kongów.</p>
+            </div>
+        </div>
+        
+        <div class="item">
+        	<div class="foto">
+            	<img src="images/birdo.jpg" alt="La quimera" width="150px" height="100px"/>
+            </div>
+            <div class="texto">
+            	<h2>Birdo</h2>
+                <p>Once the enemy of Mario spitting eggs, now is a friend. In addition to his evil role in Super Mario Bros. 2, Birdo appeared in Mario Tennis and Mario Kart: Double Dash Yoshi as equivalent. So the quarterback judge players. In a word, but the main role in the game Super Mario Bros. 2 on the NES and then the conversions of the game for Nintendo DS and Wii wyst?powa? not the enemy in any other game. The enemy is characterized by a pink colored skin that occurs at the end of each stage of the game Super Mario Bros. 2, and beat him was based on the fact that the player had to jump on the flying egg spitting Birdo and then pressing the shooting which resulted in the Mario could catch the egg and use it as throwing weapon. Overcoming Birdo opened the door that resembled a falcon beak. The door led to the player passing to the next world.</p>
+            </div>
+        </div>
+        
+        <div class="item">
+        	<div class="foto">
+            	<img src="images/waluigi.jpg" alt="La medusa" width="150px" height="100px"/>
+            </div>
+            <div class="texto">
+            	<h2>Waluigi</h2>
+                <p>Waluigi first appeared in Mario Tennis for the Nintendo 64 Since then, accompanied and helped his brother, Wariowi. He appeared in Mario Party series (3 parts), Mario Kart Double Dash!, And Mario Golf and Mario Power Tennis for the GameCube'' a In fact, little is known about him, except that it is certainly the opposite of najwi?szym rival and Luigi. His name is linked to the word warui (in Japanese bad) and Luigi. For the first time there is a villain in the Dancing Stage: Mario Mix, where he and his brother steal balls Musical sound control in the Mushroom Kingdom.</p>
+            </div>
+        </div>
+        
+        <div class="item">
+        	<div class="foto">
+            	<img src="images/peach.jpg" alt="El minotauro" width="150px" height="100px"/>
+            </div>
+            <div class="texto">
+            	<h2>Peach</h2>
+                <p>Peach - the girl Mariana, speaks Mushroom Kingdom. It is often kidnapped by Bowser. Rarely comes to the fight, but has proven that he can do it - even in Super Mario RPG and Super Mario Bros. 2 (for this purpose usually uses an umbrella or pan). It is Toadsworth guardian. In Mario & Luigi almost been kidnapped, but she managed to hide at the last minute. In Paper Mario: TTYD is a mysterious map to find the Crystal Stars, but is kidnapped by a mysterious group of X-Nautów.</p>
+            </div>
+        </div>
+
+</div>
+</body>
+</html>

@@ -2,40 +2,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Arrastra Palabra Inglés</title>
+<title>Arrastra palabras</title>
 <script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
-<script type="text/javascript" src="js/prefixfree.min.js" ></script>
 <script type="text/javascript" src="js/jquery-ui.js" ></script>
 <script>
 $(document).ready(inicio);
 /********* Variables *****/
-var palabras_array = new Array();
-var espanol_array = new Array();//fotos y cuadros
-var ingles_array = new Array();
+var cuadros_array = new Array();
+var palabra_array = new Array();
 var $item;
-//
-palabras_array.push({texto:"Caballo", ingles:"Horse", num:1});
-palabras_array.push({texto:"Perro", ingles:"Dog", num:2});
-palabras_array.push({texto:"Gato", ingles:"Cat", num:3});
-palabras_array.push({texto:"Pájaro", ingles:"Bird", num:4});
-palabras_array.push({texto:"Gallina", ingles:"Hen", num:5});
-palabras_array.push({texto:"Vaca", ingles:"Cow", num:6});
-palabras_array.push({texto:"Auto", ingles:"Car", num:7});
-palabras_array.push({texto:"Avión", ingles:"Airplain", num:8});
-palabras_array.push({texto:"Mesa", ingles:"Table", num:9});
-palabras_array.push({texto:"Silla", ingles:"Chair", num:10});
-palabras_array.push({texto:"Ventana", ingles:"Window", num:11});
-palabras_array.push({texto:"Casa", ingles:"Home", num:12});
-palabras_array.push({texto:"Lapiz", ingles:"Pen", num:13});
-palabras_array.push({texto:"Pluma", ingles:"Pen", num:14});
-palabras_array.push({texto:"Libro", ingles:"Book", num:15});
-palabras_array.push({texto:"Cielo", ingles:"Sky", num:16});
-palabras_array.push({texto:"Mar", ingles:"Sea", num:17});
-palabras_array.push({texto:"Estrella", ingles:"Star", num:18});
+//1) Cuadros
+cuadros_array.push({texto:"Caballo", num:1});
+cuadros_array.push({texto:"Perro", num:2});
+cuadros_array.push({texto:"Gato", num:3});
+cuadros_array.push({texto:"Pájaro", num:4});
+cuadros_array.push({texto:"Gallina", num:5});
+cuadros_array.push({texto:"Vaca",num:6});
+//2) Palabras
+palabra_array.push({texto:"Horse", num:1});
+palabra_array.push(texto:"Dog", num:2});
+palabra_array.push({texto:"Cat", num:3});
+palabra_array.push({texto:"Bird", num:4});
+palabra_array.push({texto:"Hen", num:5});
+palabra_array.push({texto:"Cow", num:6});
 //
 function inicio(){
-	//Selecciona las palabras aleatoriamente
-	seleccionaPalabras();
 	//Oculta y muestra botones
 	$("#jugar").hide();
 	$("#verifica").show();
@@ -45,11 +36,13 @@ function inicio(){
 	//LLenamos las fotos
 	//
 	$(".foto").each(function(i) {
-        l = espanol_array.length;
+        l = palabra_array.length;
 		r = Math.floor(Math.random()*l);
-		$(this).html("<p>"+espanol_array[r].texto+"</p>");
-		$(this).attr("data-num",espanol_array[r].num);
-		espanol_array.splice(r,1);
+		//Despliega la palabra
+		$(this).html("<p>"+palabra_array[r].texto+"</p>");
+		//Almacena el número
+		$(this).attr("data-num",palabra_array[r].num);
+		palabra_array.splice(r,1);
     });
 	//
 	//marcos
@@ -62,11 +55,15 @@ function inicio(){
 	});
 	//
 	$(".marco").each(function(i){
-		l = ingles_array.length;
+		l = cuadros_array.length;
 		r = Math.floor(Math.random()*l);
-		$(this).html("<p>"+ingles_array[r].ingles+"</p>");
-		$(this).attr("data-num",ingles_array[r].num);
-		ingles_array.splice(r,1);	
+		//3) Despliega la palabra
+	    $(this).html("<p>"+cuadros_array[r].texto+"</p>");
+		//4) Almacena el número
+		$(this).attr("data-num",cuadros_array[r].num);
+		//5)
+		cuadro_array.splice(r,1);
+	
 	});
 	//
 	$("#verifica").on("click",onVerifica);
@@ -74,21 +71,8 @@ function inicio(){
 	$(".foto").on("mousedown",onMouseDown);
 	$(".foto").on("mouseup",onMouseUp);
 	$(".marco").on("drop",onDrop);
-	//Botones
-	$("input[type='button']").button();
 	
 }
-//
-function seleccionaPalabras(){
-	for(i=0; i < 6; i++){
-		num = palabras_array.length;
-		n = Math.floor(Math.random()*num);
-		espanol_array.push(palabras_array[n]);
-		ingles_array.push(palabras_array[n]);
-		palabras_array.splice(n,1);
-	}
-}
-
 function onVerifica(){
 	//Oculta y muestra botones
 	$("#jugar").show();
@@ -113,13 +97,9 @@ function onMouseDown(){
 	$item.css("z-index","1");
 }
 function onMouseUp(){
-	
-	
 }
 function onDrop(){
 	$(this).attr("data-cuadro", $item.attr("data-num"));
-	//alert($(this).attr("data-num")+", "+$(this).attr("data-cuadro"));
-	
 }
 </script>
 <style>
@@ -133,6 +113,7 @@ function onDrop(){
 	height:120px;
 	float:left;
 	margin:5px;
+	background-color: orange;
 }
 .marco{
 	width:120px;
