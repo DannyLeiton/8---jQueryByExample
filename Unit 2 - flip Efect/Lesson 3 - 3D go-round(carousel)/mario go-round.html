@@ -57,6 +57,7 @@ img{
     background-color:white;
 }
 </style>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="js/jquery-1.6.min.js"></script>
 <script src="js/jquery.roundabout.min.js"></script>
 <script>
@@ -81,9 +82,11 @@ function crearCarrusel(){
 	});
 }
 function despliegaTexto(){
-	var elemento = $("#carrusel").data("roundabout").childInFocus;
+    var elemento = $("#carrusel").data("roundabout").childInFocus;
 	var texto = $("#datos .item .texto:eq("+elemento+")").html();
-	$("#descripcion").html(texto);
+	var imgs = $("#datos .item .foto img");
+    imgs[elemento].setAttribute("height", "300px");
+    $("#descripcion").html(texto);
 }
 </script>
 <link rel="icon" href="http://example.com/favicon.png">

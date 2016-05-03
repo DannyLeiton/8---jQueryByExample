@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<title>Software School</title>
+<style>
+header, section, nav, footer, article{
+	display:block;
+	margin:0;
+	padding:0;
+}
+html, body, h1, h2, h3, h4, h5, h6, p{
+	margin:0;
+	padding:0;
+}
+html{
+	background:#fff;
+}
+body{
+	width:960px;
+	margin:0 auto;
+	background:#000;
+	font-family:Verdana, Geneva, sans-serif;
+}
+header{
+	height:90px;
+	background:#213F52;
+}
+article, aside{
+	background:#FCF7CD;
+}
+footer{
+	height:60px;
+	background:#213F52;
+	clear:both;
+}
+/* Fuentes */
+h1{
+	font-size:2.2em;
+	color:#FCF7CD;
+ 	text-align: center;
+	margin-bottom:5px;
+}
+h2{
+	font-size:1.8em;
+	color:#FCF7CD;
+ 	text-align: center;
+	padding-top:.2em;
+}
+h3{
+	font-size:.8em;
+	color:#f2e3b6;
+ 	text-align: center;
+	padding-top:.2em;
+}
+p{
+	font-size:1em;
+	padding-top:1em;
+	padding-left:1em;
+	padding-right:1em;
+}
+a{
+	font-size:0.6em;
+	color:#f2e3b6;
+	text-align: left;
+	padding-top:.6em;
+	text-decoration: none;
+	letter-spacing: 0.5em;
+}
+/*Clases*/
+#izq{
+	float:left;
+	width:600px;
+	height:750px;
+}
+#der{
+	float:right;
+	width:360px;
+	height:750px;
+}
+ul, li{
+	display:inline;
+}
+img{
+	float:left;
+	padding-right:1em;
+}
+.imgIzq{
+	clear:both;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:0;
+	margin-bottom:1em;
+}
+</style>
+<style>
+/*nav*/
+.nav_menu{
+	width:360px;
+	position:relative;
+	z-index:1000;
+	margin:0 auto;
+	padding:0;
+}
+/* drop menu*/
+.nav_menu ul.dropmenu li{
+	height:28px;
+	text-align:left;		
+}
+.nav_menu ul.dropmenu li:hover{
+	background-color:#006699;
+}
+.nav_menu ul.dropmenu li:selected{
+	background-color:black;
+}
+.nav_menu ul.dropmenu li a{
+	color:#fff;
+	text-decoration:none;
+	padding:0;
+	line-height:12px;
+	letter-spacing:0.4em;
+}
+
+/*** toplevel ***/
+.nav_menu ul.dropmenu{
+	margin:0;
+	padding:0;
+}
+.nav_menu ul.dropmenu a.toplevel{
+	height:auto;
+	margin:7px;
+	padding: 0px 0px 4px 0px;
+	color:#fff;
+	font-weight:bold;
+	text-decoration:none;
+}
+.nav_menu ul.dropmenu a.toplevel.hover{
+	color:#fff;
+}
+.nav_menu ul.dropmenu a.toplevel.selected{
+	color:#f7ad0b;
+}
+
+/***** Sublevel *****/
+.nav_menu ul.dropmenu li ul{
+	background-color:#006699;	
+}
+.nav_menu ul.dropmenu li ul li a.sublevel{
+	color:#fff;
+	width:180px;
+	padding:5px 5px 5px 20px;
+	margin:0;
+}
+.nav_menu ul.dropmenu li ul li a.sublevel.hover{
+	color:#fff;
+	background-color:#0066ff;
+}
+.nav_menu ul.dropmenu li ul li a.sublevel.hover{
+	color:#f7ad0d;
+}
+</style>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/jquery.dropmenu-1.1.4.js"></script>
+<script>
+$(document).ready(function(){
+	//1) Drop menu
+	$(".nav_menu > ul").dropmenu({
+		//2) Efecto
+		effect: "slide",
+		//3) velocidad
+		speed:250,
+		//4) Timeout
+		timeout: 0,		
+		//5) no blanck space
+		nbsp: false
+	});
+	//Termina la funcion dropmenu	
+});
+</script>
+</head>
+
+<body>
+<header>
+<h1>SW School</h1>
+<nav class="nav_menu">
+	<ul class="dropmenu">
+    	<li><a href="#">Desarrollo Web</a>
+        	<ul>
+            	<li><a href="#">HTML & CSS</a></li>
+            	<li><a href="#">JavaScript</a>
+            		<ul>
+            			<li><a href="#">AngularJS</a></li>
+            			<li><a href="#">NodeJS</a></li>
+            			<li><a href="#">Express.js</a></li>
+            		</ul>
+            	</li>
+            	<li><a href="#">XML</a></li>
+            	<li><a href="#">jQuery</a></li>
+            	<li><a href="#">PHP</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Mobile</a>
+        	<ul>
+            	<li><a href="#">iOS</a></li>
+            	<li><a href="#">Android</a></li>
+            	<li><a href="#">Win Phone</a></li>
+            	<li><a href="#">HTML5</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Diseño Web</a>
+        	<ul>
+            	<li><a href="#">Photoshop</a></li>
+            	<li><a href="#">Ilustrator</a></li>
+            	<li><a href="#">Dreamweaver</a></li>
+            	<li><a href="#">Muse</a></li>
+            </ul>        
+        </li>
+    </ul>
+</nav>
+</header>
+<section>
+<article id="izq"><p><img src="imagenes/Android.jpg" width="200px" height="300x">Android es un sistema operativo basado en el núcleo Linux. Fue diseñado principalmente para dispositivos móviles con pantalla táctil, como teléfonos inteligentes, tablets o tabléfonos; y también para relojes inteligentes, televisores y automóviles. Inicialmente fue desarrollado por Android Inc., empresa que Google respaldó económicamente y más tarde, en 2005, compró.9 Android fue presentado en 2007 junto la fundación del Open Handset Alliance (un consorcio de compañías de hardware, software y telecomunicaciones) para avanzar en los estándares abiertos de los dispositivos móviles.10 El primer móvil con el sistema operativo Android fue el HTC Dream y se vendió en octubre de 2008.11 Los dispositivos de Android venden más que las ventas combinadas de Windows Phone e IOS.</p><p><img src="imagenes/ios.png" width="200px" height="300px">iOS es un sistema operativo móvil de la multinacional Apple Inc. Originalmente desarrollado para el iPhone (iPhone OS), después se ha usado en dispositivos como el iPod touch y el iPad. No permite la instalación de iOS en hardware de terceros. Tenía el 26% de cuota de mercado de sistemas operativos móviles vendidos en el último cuatrimestre de 2010, detrás de Android y Windows Phone. Actualmente su sistema operativo se encuentra en la novena versión, mejor conocida como iOS 9.</p>
+  <p>&nbsp;</p>
+</article>
+<aside id="der"><p><img src="imagenes/php.png" class="imgIzq">PHP es un lenguaje de programación de uso general de código del lado del servidor originalmente diseñado para el desarrollo web de contenido dinámico. Fue uno de los primeros lenguajes de programación del lado del servidor que se podían incorporar directamente en el documento HTML en lugar de llamar a un archivo externo que procese los datos. El código es interpretado por un servidor web con un módulo de procesador de PHP que genera la página web resultante. PHP ha evolucionado por lo que ahora incluye también una interfaz de línea de comandos que puede ser usada en aplicaciones gráficas independientes. Puede ser usado en la mayoría de los servidores web al igual que en casi todos los sistemas operativos y plataformas sin ningún costo. </p>
+  <p>PHP se considera uno de los lenguajes más flexibles, potentes y de alto rendimiento conocidos hasta el día de hoy[cita requerida], lo que ha atraído el interés de múltiples sitios con gran demanda de tráfico, como Facebook, para optar por el mismo como tecnología de servidor.</p>
+</aside>
+</section>
+<footer>
+<h3>Todos los derechos reservados SWSchool &copy;<h3>
+<nav>
+    <ul>
+    <li><a href="ios.html">iOS</a>&nbsp;|</li>
+    <li><a href="android.html">Android</a>&nbsp;|</li>
+    <li><a href="ror.html">RoR</a>&nbsp;|</li>
+    <li><a href="js.html">JavaScript</a>&nbsp;|</li>
+    <li><a href="php.html">PHP</a>&nbsp;|</li>
+    <li><a href="dotnot.html">.NOT</a></li>
+    </ul>
+</nav>
+</footer>
+</body>
+</html>
